@@ -1,0 +1,184 @@
+2026-11-09 19:00:06 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-09 19:00:06 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-09 19:00:06 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-09 19:00:06 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-09 19:00:08 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.99, 'DT': 82.91}
+2026-11-09 19:00:08 - [INFO] - BronzeService - Успешно сохранен batch_id='da14da52-04cf-42fc-a194-1e1a9f4809d5' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-09 19:00:09 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_da14da52.json и /app/data/bronze_latest.json
+2026-11-09 19:00:09 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-09 19:07:46 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-09 19:07:46 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-09 19:07:46 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-09 19:07:46 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-09 19:07:47 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.99, 'DT': 82.91}
+2026-11-09 19:07:48 - [INFO] - BronzeService - Успешно сохранен batch_id='369a21bd-30ff-47d9-a91f-f55e9ba42147' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-09 19:07:48 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_369a21bd.json и /app/data/bronze_latest.json
+2026-11-09 19:07:48 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-09 20:00:06 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-09 20:00:07 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-09 20:00:07 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-09 20:00:07 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-09 20:00:08 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.99, 'DT': 82.91}
+2026-11-09 20:00:09 - [INFO] - BronzeService - Успешно сохранен batch_id='ea0b1a48-1446-4cb2-aaea-b6e072136721' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-09 20:00:09 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_ea0b1a48.json и /app/data/bronze_latest.json
+2026-11-09 20:00:09 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-09 21:00:06 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-09 21:00:06 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-09 21:00:06 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-09 21:00:06 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-09 21:00:07 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.99, 'DT': 82.91}
+2026-11-09 21:00:08 - [INFO] - BronzeService - Успешно сохранен batch_id='078522a1-1c16-4d37-a798-67812ed8ac25' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-09 21:00:09 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_078522a1.json и /app/data/bronze_latest.json
+2026-11-09 21:00:09 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-09 22:00:05 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-09 22:00:05 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-09 22:00:05 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-09 22:00:05 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-09 22:00:07 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.98, 'DT': 82.91}
+2026-11-09 22:00:07 - [INFO] - BronzeService - Успешно сохранен batch_id='38a1b47f-35b4-4aa8-a5af-78a1232d0929' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-09 22:00:08 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_38a1b47f.json и /app/data/bronze_latest.json
+2026-11-09 22:00:08 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-09 23:00:05 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-09 23:00:06 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-09 23:00:06 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-09 23:00:06 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-09 23:00:07 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.98, 'DT': 82.91}
+2026-11-09 23:00:08 - [INFO] - BronzeService - Успешно сохранен batch_id='7c1cc55b-6a11-46ed-b462-10cd26458c52' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-09 23:00:08 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_7c1cc55b.json и /app/data/bronze_latest.json
+2026-11-09 23:00:08 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-10 00:00:04 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-10 00:00:05 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-10 00:00:05 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-10 00:00:05 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-10 00:00:06 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.98, 'DT': 82.91}
+2026-11-10 00:00:07 - [INFO] - BronzeService - Успешно сохранен batch_id='2b492fcf-e5c7-4f55-a0fb-ebd90b9b4a01' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-10 00:00:07 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_2b492fcf.json и /app/data/bronze_latest.json
+2026-11-10 00:00:07 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-10 01:00:05 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-10 01:00:05 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-10 01:00:05 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-10 01:00:05 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-10 01:00:07 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.98, 'DT': 82.91}
+2026-11-10 01:00:07 - [INFO] - BronzeService - Успешно сохранен batch_id='cbd243c4-bced-4662-9c3f-585ee043347d' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-10 01:00:08 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_cbd243c4.json и /app/data/bronze_latest.json
+2026-11-10 01:00:08 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-10 02:00:05 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-10 02:00:05 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-10 02:00:05 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-10 02:00:05 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-10 02:00:06 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.97, 'DT': 82.91}
+2026-11-10 02:00:07 - [INFO] - BronzeService - Успешно сохранен batch_id='6cdb8e27-0879-4aa0-8397-162d1608cd30' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-10 02:00:07 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_6cdb8e27.json и /app/data/bronze_latest.json
+2026-11-10 02:00:07 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-10 03:00:04 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-10 03:00:05 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-10 03:00:05 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-10 03:00:05 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-10 03:00:06 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.97, 'DT': 82.91}
+2026-11-10 03:00:07 - [INFO] - BronzeService - Успешно сохранен batch_id='9c5a6e7b-3532-4ae4-9a2c-4a3b924ad2c8' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-10 03:00:07 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_9c5a6e7b.json и /app/data/bronze_latest.json
+2026-11-10 03:00:07 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-10 04:00:05 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-10 04:00:05 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-10 04:00:05 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-10 04:00:05 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-10 04:00:06 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.99, 'DT': 82.91}
+2026-11-10 04:00:07 - [INFO] - BronzeService - Успешно сохранен batch_id='5cfe0d1d-fcca-4253-8e90-938e8c49dd5d' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-10 04:00:07 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_5cfe0d1d.json и /app/data/bronze_latest.json
+2026-11-10 04:00:07 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-10 05:00:05 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-10 05:00:05 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-10 05:00:05 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-10 05:00:05 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-10 05:00:07 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.99, 'DT': 82.91}
+2026-11-10 05:00:07 - [INFO] - BronzeService - Успешно сохранен batch_id='d3b11297-4795-45fa-8b76-84d05221639c' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-10 05:00:08 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_d3b11297.json и /app/data/bronze_latest.json
+2026-11-10 05:00:08 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-10 06:00:04 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-10 06:00:05 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-10 06:00:05 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-10 06:00:05 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-10 06:00:06 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.99, 'DT': 82.91}
+2026-11-10 06:00:06 - [INFO] - BronzeService - Успешно сохранен batch_id='0dd49df8-8be5-4d24-aae2-7680a42e08ba' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-10 06:00:07 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_0dd49df8.json и /app/data/bronze_latest.json
+2026-11-10 06:00:07 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-10 07:00:34 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-10 07:00:34 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-10 07:00:34 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-10 07:00:34 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-10 07:00:36 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.99, 'DT': 82.91}
+2026-11-10 07:00:36 - [INFO] - BronzeService - Успешно сохранен batch_id='4f0c2d16-6f53-4dd8-ab40-8dcb0e4f8667' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-10 07:00:37 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_4f0c2d16.json и /app/data/bronze_latest.json
+2026-11-10 07:00:37 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-10 08:00:04 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-10 08:00:05 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-10 08:00:05 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-10 08:00:05 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-10 08:00:06 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.99, 'DT': 82.91}
+2026-11-10 08:00:07 - [INFO] - BronzeService - Успешно сохранен batch_id='5e030a75-3fa4-41ab-8681-4e60cc8db78c' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-10 08:00:07 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_5e030a75.json и /app/data/bronze_latest.json
+2026-11-10 08:00:07 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-10 09:00:05 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-10 09:00:05 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-10 09:00:05 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-10 09:00:05 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-10 09:00:07 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.99, 'DT': 82.91}
+2026-11-10 09:00:07 - [INFO] - BronzeService - Успешно сохранен batch_id='8d47feee-b2ec-4090-8bc1-b931e07ddffd' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-10 09:00:08 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_8d47feee.json и /app/data/bronze_latest.json
+2026-11-10 09:00:08 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-10 10:00:06 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-10 10:00:06 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-10 10:00:06 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-10 10:00:06 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-10 10:00:07 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.99, 'DT': 82.91}
+2026-11-10 10:00:08 - [INFO] - BronzeService - Успешно сохранен batch_id='d0cf4d08-96bf-4626-86f8-475b27cfb2ef' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-10 10:00:09 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_d0cf4d08.json и /app/data/bronze_latest.json
+2026-11-10 10:00:09 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-10 11:00:05 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-10 11:00:05 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-10 11:00:05 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-10 11:00:05 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-10 11:00:07 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.99, 'DT': 82.91}
+2026-11-10 11:00:08 - [INFO] - BronzeService - Успешно сохранен batch_id='c2dd36ed-ba12-4c3e-9cf5-7d1a6c82d751' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-10 11:00:08 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_c2dd36ed.json и /app/data/bronze_latest.json
+2026-11-10 11:00:08 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-10 12:00:06 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-10 12:00:06 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-10 12:00:06 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-10 12:00:06 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-10 12:00:08 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.99, 'DT': 82.91}
+2026-11-10 12:00:08 - [INFO] - BronzeService - Успешно сохранен batch_id='c5ab0b33-1fec-4090-9086-1e10954d3498' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-10 12:00:09 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_c5ab0b33.json и /app/data/bronze_latest.json
+2026-11-10 12:00:09 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-10 13:00:05 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-10 13:00:05 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-10 13:00:05 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-10 13:00:05 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-10 13:00:07 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.99, 'DT': 82.91}
+2026-11-10 13:00:08 - [INFO] - BronzeService - Успешно сохранен batch_id='1613d574-479d-4ec7-bab2-93cea3d870d8' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-10 13:00:09 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_1613d574.json и /app/data/bronze_latest.json
+2026-11-10 13:00:09 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-10 14:00:05 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-10 14:00:05 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-10 14:00:05 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-10 14:00:05 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-10 14:00:07 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.99, 'DT': 82.91}
+2026-11-10 14:00:07 - [INFO] - BronzeService - Успешно сохранен batch_id='7a15788d-f208-4480-be4c-da8aeab850ac' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-10 14:00:08 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_7a15788d.json и /app/data/bronze_latest.json
+2026-11-10 14:00:08 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-10 15:00:05 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-10 15:00:05 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-10 15:00:05 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-10 15:00:05 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-10 15:00:07 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.99, 'DT': 82.91}
+2026-11-10 15:00:08 - [INFO] - BronzeService - Успешно сохранен batch_id='579256a2-aa0f-472e-8336-b229c9470fba' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-10 15:00:08 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_579256a2.json и /app/data/bronze_latest.json
+2026-11-10 15:00:08 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.
+2026-11-10 16:00:05 - [INFO] - BronzeService - Запуск конвейера Bronze. Режим: PRODUCTION
+2026-11-10 16:00:06 - [INFO] - BronzeService.RealAzsCollector - Собрано 707 станций x 30 дней = 21210 записей.
+2026-11-10 16:00:06 - [INFO] - BronzeService - Собрано 21210 станций через RealAzsCollector.
+2026-11-10 16:00:06 - [INFO] - BronzeService - Запуск парсера рыночных цен (МТА + Бензонавт)...
+2026-11-10 16:00:07 - [INFO] - BronzeService - Рыночный срез успешно сформирован: {'AI-92': 68.0, 'AI-95': 74.99, 'DT': 82.91}
+2026-11-10 16:00:08 - [INFO] - BronzeService - Успешно сохранен batch_id='b7a57030-c34b-4122-888d-d7bb3068c4f5' (21210 записей) в таблицу bronze_azs_raw.
+2026-11-10 16:00:09 - [INFO] - BronzeService - Снимки данных озера сохранены: /app/data/bronze_b7a57030.json и /app/data/bronze_latest.json
+2026-11-10 16:00:09 - [INFO] - BronzeService - Успешно сохранено 21210 станций и рыночный срез цен в слой Bronze.

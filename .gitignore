@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Временные файлы данных
+*.json
+*.csv
+
+# Окружение и секреты
+.env
+
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Environments and secrets
+.venv/
+env/
+venv/
+
+# Docker / IDE / OS artifacts
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Environment secrets
+.env.*
+!.env.example

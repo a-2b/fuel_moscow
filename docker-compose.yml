@@ -1,0 +1,144 @@
+version: '3.8'
+
+services:
+  postgres_db:
+    image: postgis/postgis:15-3.3
+    container_name: moscow_fuel_postgres
+    restart: always
+    dns:
+      - 8.8.8.8
+      - 77.88.8.8
+    env_file:
+      - .env
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d
+    networks:
+      fuel_network:
+        aliases:
+          - postgres_db
+          - moscow_fuel_postgres
+
+  airflow:
+    image: apache/airflow:2.7.2
+    container_name: moscow_fuel_airflow
+    restart: always
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=sqlite:////opt/airflow/airflow.db
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__CORE__TEST_CONNECTION_ENABLED=True
+      - _PIP_ADDITIONAL_REQUIREMENTS=apache-airflow-providers-docker apache-airflow-providers-postgres psycopg2-binary requests
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./shared:/opt/airflow/shared
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8080:8080"
+    command: >
+      bash -c "airflow db migrate && 
+      airflow users create --username admin --password admin --firstname Data --lastname Engineer --role Admin --email admin@example.com && 
+      (airflow webserver & airflow scheduler)"
+    depends_on:
+      - postgres_db
+    networks:
+      - fuel_network
+
+  presentation_service:
+    build:
+      context: .
+      dockerfile: presentation_service/Dockerfile
+    container_name: moscow_fuel_presentation
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_HOST=moscow_fuel_postgres
+    ports:
+      - "${PRESENTATION_PORT:-8000}:8000"
+    volumes:
+      - ./shared:/app/shared
+      - ./presentation_service:/app/presentation_service
+    depends_on:
+      - postgres_db
+    networks:
+      - fuel_network
+
+  # --- СЕРВИСЫ ETL (Сборка образов для запуска из Airflow DockerOperator) ---
+
+  bronze_service:
+    build:
+      context: .
+      dockerfile: bronze_service/Dockerfile
+    image: fuel_moscow-bronze_service:latest
+    container_name: moscow_fuel_bronze
+    restart: "no"
+    profiles: ["etl-tasks"]
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_HOST=moscow_fuel_postgres
+      - PYTHONPATH=/app
+    volumes:
+      - lake_data:/app/data
+      - ./shared:/app/shared
+      - ./bronze_service:/app/bronze_service
+    depends_on:
+      - postgres_db
+    networks:
+      - fuel_network
+
+  silver_service:
+    build:
+      context: .
+      dockerfile: silver_service/Dockerfile
+    image: fuel_moscow-silver_service:latest
+    container_name: moscow_fuel_silver
+    restart: "no"
+    profiles: ["etl-tasks"]
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_HOST=moscow_fuel_postgres
+      - PYTHONPATH=/app
+    volumes:
+      - lake_data:/app/data
+      - ./shared:/app/shared
+      - ./silver_service:/app/silver_service
+    depends_on:
+      - postgres_db
+    networks:
+      - fuel_network
+
+  gold_service:
+    build:
+      context: .
+      dockerfile: gold_service/Dockerfile
+    image: fuel_moscow-gold_service:latest
+    container_name: moscow_fuel_gold
+    restart: "no"
+    profiles: ["etl-tasks"]
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_HOST=moscow_fuel_postgres
+      - PYTHONPATH=/app
+    volumes:
+      - lake_data:/app/data
+      - ./shared:/app/shared
+      - ./gold_service:/app/gold_service
+    depends_on:
+      - postgres_db
+    networks:
+      - fuel_network
+
+volumes:
+  postgres_data:
+  lake_data:
+
+networks:
+  fuel_network:
+    driver: bridge
+    name: fuel_network

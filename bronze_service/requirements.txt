@@ -1,0 +1,9 @@
+requests==2.31.0
+sqlalchemy==2.0.28
+psycopg2-binary==2.9.9
+pydantic==2.6.3
+pydantic-settings==2.2.1
+geoalchemy2==0.14.4
+schedule==1.2.1
+beautifulsoup4==4.12.3
+pandas==2.2.1

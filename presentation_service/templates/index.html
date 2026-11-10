@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мониторинг рынка топлива г. Москвы</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.fullscreen@3.0.2/Control.FullScreen.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            /* Мягкая пастельная гамма интерфейса */
+            --bg-page: #f4f6f8;
+            --bg-card: #ffffff;
+            --border-card: #e5e9f0;
+            --text-main: #2d3748;
+            --text-secondary: #718096;
+            --text-accent: #3182ce;
+            
+            /* Пастельные акценты */
+            --pastel-blue: #bee3f8;
+            --pastel-blue-accent: #3182ce;
+            --pastel-yellow: #feebc8;
+            --pastel-green: #c6f6d5;
+            --pastel-green-text: #22543d;
+            --pastel-gray: #edf2f7;
+            --pastel-red: #fed7d7;
+            --pastel-purple: #e9d8fd;
+
+            /* Цвета для кнопок моделей и фонов */
+            --gbdt-btn-bg: #e9d8fd;
+            --gbdt-btn-border: #d6bcfa;
+            --gbdt-btn-text: #553c9e;
+            --gbdt-chart-bg: #faf5ff;
+
+            --linear-btn-bg: #e6fffa;
+            --linear-btn-border: #b2f5ea;
+            --linear-btn-text: #234e52;
+            --linear-chart-bg: #f0fff4;
+
+            /* Индикаторы тренда */
+            --trend-down: #2f855a;
+            --trend-up: #c53030;
+        }
+
+        body { 
+            margin: 0; 
+            padding: 24px; 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            background-color: var(--bg-page); 
+            color: var(--text-main); 
+            font-size: 16px; 
+        }
+
+        .header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background-color: var(--bg-card); 
+            padding: 18px 26px; 
+            border-radius: 12px; 
+            border: 1px solid var(--border-card); 
+            box-shadow: 0 4px 12px rgba(148, 163, 184, 0.05); 
+            margin-bottom: 24px; 
+        }
+        .header h1 { 
+            margin: 0; 
+            font-size: 25px; 
+            color: var(--text-main); 
+            font-weight: 700; 
+        }
+        .header p { 
+            margin: 6px 0 0 0; 
+            font-size: 16px; 
+            color: var(--text-secondary); 
+        }
+        .status-badge { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            background-color: var(--pastel-green); 
+            color: var(--pastel-green-text); 
+            border: 1px solid #9ae6b4; 
+            padding: 8px 18px; 
+            border-radius: 20px; 
+            font-weight: 600; 
+            font-size: 16px; 
+        }
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #38a169;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        
+        .grid-container { 
+            display: grid; 
+            gap: 20px; 
+            margin-bottom: 20px; 
+        }
+        /* Единое строгое выравнивание по вертикали (1.4fr к 1fr для обоих рядов) */
+        .dashboard-row-grid {
+            grid-template-columns: 1.4fr 1fr; 
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .card { 
+            background-color: var(--bg-card); 
+            border-radius: 12px; 
+            border: 1px solid var(--border-card); 
+            box-shadow: 0 4px 12px rgba(148, 163, 184, 0.05); 
+            padding: 22px; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .card-header-block {
+            margin-bottom: 16px;
+        }
+        .card-header-block h2 { 
+            margin: 0; 
+            font-size: 19px; 
+            color: var(--text-main); 
+            font-weight: 700; 
+        }
+        .card-header-block .sub-desc {
+            font-size: 15px; 
+            color: var(--text-secondary); 
+            margin-top: 4px;
+            display: block;
+        }
+        
+        #map_container { 
+            height: 480px; 
+            width: 100%; 
+            border-radius: 8px; 
+            background-color: #f7fafc; 
+            border: 1px solid var(--border-card); 
+            z-index: 1;
+        }
+        .leaflet-container img { max-width: none !important; max-height: none !important; opacity: 1 !important; visibility: visible !important; display: inline !important; }
+        .leaflet-tile-pane { z-index: 200 !important; }
+        .leaflet-popup-content { font-size: 15px !important; line-height: 1.5; }
+
+        .report-box { 
+            background-color: #f8fafc; 
+            border-left: 5px solid #90cdf4; 
+            padding: 12px 16px; 
+            border-radius: 0 8px 8px 0; 
+            font-size: 15.5px; 
+            line-height: 1.55; 
+            color: #4a5568; 
+            max-height: 270px; 
+            overflow-y: auto; 
+            white-space: pre-line;
+        }
+        
+        .filter-panel { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 14px; 
+        }
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .filter-label {
+            font-size: 16px; 
+            color: var(--text-secondary); 
+            min-width: 125px;
+            font-weight: 500;
+        }
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn-filter { 
+            padding: 8px 18px; 
+            border: 1px solid transparent; 
+            border-radius: 8px; 
+            font-weight: 600; 
+            font-size: 15.5px; 
+            cursor: pointer; 
+            transition: all 0.2s ease; 
+        }
+        
+        .btn-fuel { 
+            background-color: #edf2f7; 
+            color: #4a5568; 
+            border-color: #e2e8f0; 
+        }
+        .btn-fuel.active { 
+            background-color: #bee3f8; 
+            color: #2b6cb0; 
+            border-color: #90cdf4; 
+        }
+        
+        .btn-sort { 
+            background-color: #edf2f7; 
+            color: #4a5568; 
+            border-color: #e2e8f0; 
+        }
+        .btn-sort.active { 
+            background-color: #e2e8f0; 
+            color: #1a202c; 
+            border-color: #cbd5e0; 
+        }
+
+        .model-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .model-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .btn-model {
+            padding: 8px 16px; 
+            border-radius: 8px; 
+            font-size: 15px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            border: 1px solid transparent; 
+            background-color: #edf2f7; 
+            color: #4a5568; 
+            transition: all 0.25s ease; 
+        }
+        .btn-model-gbdt {
+            background-color: #f7f2fc;
+            border-color: #e9d8fd;
+            color: #6b46c1;
+        }
+        .btn-model-gbdt.active {
+            background-color: var(--gbdt-btn-bg);
+            border-color: var(--gbdt-btn-border);
+            color: var(--gbdt-btn-text);
+            box-shadow: 0 2px 6px rgba(183, 148, 244, 0.25);
+        }
+
+        .btn-model-linear {
+            background-color: #f2faf9;
+            border-color: #e6fffa;
+            color: #285e61;
+        }
+        .btn-model-linear.active {
+            background-color: var(--linear-btn-bg);
+            border-color: var(--linear-btn-border);
+            color: var(--linear-btn-text);
+            box-shadow: 0 2px 6px rgba(129, 230, 217, 0.25);
+        }
+
+        /* Контейнер графика во всю ширину панели с сохранением внутренних отступов карточки */
+        .chart-wrapper {
+            position: relative; 
+            height: 260px; 
+            width: 100%;
+            border-radius: 8px;
+            padding: 10px 14px;
+            box-sizing: border-box;
+            background-color: var(--gbdt-chart-bg);
+            border: 1px solid #edf2f7;
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+
+        .metrics-badge {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 14.5px; 
+            color: var(--text-secondary); 
+            background: #ffffff;
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            position: relative;
+        }
+        .metric-item {
+            cursor: pointer;
+            border-bottom: 1px dotted #a0aec0;
+            position: relative;
+            user-select: none;
+            transition: color 0.15s ease;
+        }
+        .metric-item:hover {
+            color: var(--text-accent);
+            border-bottom-color: var(--text-accent);
+        }
+        .metric-val {
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+        .val-down {
+            color: var(--trend-down) !important;
+        }
+        .val-up {
+            color: var(--trend-up) !important;
+        }
+
+        .metric-tooltip {
+            position: absolute;
+            bottom: 40px;
+            right: 0;
+            background: #2d3748;
+            color: #ffffff;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px; 
+            line-height: 1.45;
+            width: 290px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+            display: none;
+            z-index: 100;
+            pointer-events: none;
+        }
+        .metric-tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            right: 24px;
+            border-width: 6px;
+            border-style: solid;
+            border-color: #2d3748 transparent transparent transparent;
+        }
+
+        table { 
+            width: 100%; 
+            text-align: left; 
+            border-collapse: collapse; 
+            font-size: 16px; 
+        }
+        th { 
+            padding: 12px 10px; 
+            color: var(--text-secondary); 
+            font-weight: 600; 
+            font-size: 15.5px;
+            border-bottom: 2px solid var(--border-card); 
+        }
+        td { 
+            padding: 12px 10px; 
+            border-bottom: 1px solid var(--border-card); 
+            color: var(--text-main); 
+            vertical-align: middle;
+        }
+        tr:last-child td { border-bottom: none; }
+        .brand-name { font-weight: 600; color: #1a202c; font-size: 16px; }
+        
+        .share-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .progress-bar-bg {
+            background-color: #edf2f7;
+            height: 9px;
+            border-radius: 5px;
+            width: 110px;
+            overflow: hidden;
+            display: inline-block;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 5px;
+        }
+
+        .spoiler-header-row {
+            background-color: #f8fafc;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.2s ease;
+        }
+        .spoiler-header-row:hover {
+            background-color: #edf2f7;
+        }
+        .spoiler-header-cell {
+            padding: 13px 12px !important;
+            font-weight: 600;
+            font-size: 16px;
+            color: #4a5568;
+            border-top: 1px dashed #cbd5e0 !important;
+            border-bottom: 1px dashed #cbd5e0 !important;
+        }
+        .spoiler-arrow {
+            display: inline-block;
+            margin-right: 6px;
+            transition: transform 0.2s ease;
+            font-size: 13px;
+            color: #718096;
+        }
+
+        #chart-data { display: none; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>Мониторинг рынка топлива г. Москвы</h1>
+            <p>Автономный режим прототипа (ГОСТ 34) • Архитектура Medallion • PostGIS 3.4</p>
+        </div>
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            Связь с СУБД/API: ОК
+        </div>
+    </div>
+
+    <!-- Верхний ряд: геокарта слева, оперативный отчет и фильтрация справа -->
+    <div class="grid-container dashboard-row-grid">
+        <div class="card">
+            <div class="card-header-block">
+                <h2>Интерактивная геокарта мониторинга АЗС г. Москвы</h2>
+                <span class="sub-desc">Координаты PostGIS EPSG:4326, маркеры сетей, цветные тайлы OSM</span>
+            </div>
+            <div id="map_container"></div>
+        </div>
+
+        <div class="right-column">
+            <div class="card">
+                <div class="card-header-block" style="margin-bottom: 10px;">
+                    <h2>Оперативная аналитическая справка LLM</h2>
+                    <span class="sub-desc">Срез от {{ report_date }}, риски, дефицит запасов</span>
+                </div>
+                <div class="report-box">{{ llm_report }}</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header-block">
+                    <h2>Панель Smart-фильтрации</h2>
+                </div>
+                <div class="filter-panel">
+                    <div class="filter-group">
+                        <span class="filter-label">Выбор топлива:</span>
+                        <div class="filter-buttons">
+                            <button id="btn-ai92" class="btn-filter btn-fuel active" onclick="toggleFuel('AI-92')">АИ-92</button>
+                            <button id="btn-ai95" class="btn-filter btn-fuel" onclick="toggleFuel('AI-95')">АИ-95</button>
+                            <button id="btn-dt" class="btn-filter btn-fuel" onclick="toggleFuel('DT')">ДТ</button>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <span class="filter-label">Сортировки:</span>
+                        <div class="filter-buttons">
+                            <button id="btn-pmin" class="btn-filter btn-sort" onclick="togglePrice('min')">Цена min</button>
+                            <button id="btn-pmax" class="btn-filter btn-sort" onclick="togglePrice('max')">Цена max</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Нижний ряд: выровнен по границе верхнего ряда (пропорция 1.4fr к 1fr) -->
+    <div class="grid-container dashboard-row-grid">
+        <!-- График прогноза цен -->
+        <div class="card">
+            <div class="card-header-block">
+                <h2>Краткосрочный прогноз цен на 7 дней</h2>
+                <span class="sub-desc">Сравнение прогнозных моделей (ML GBDT vs. Линейный тренд IQR)</span>
+            </div>
+
+            <div class="model-controls">
+                <div class="model-buttons">
+                    <button id="btn-model-gbdt" class="btn-model btn-model-gbdt active" onclick="switchForecastModel('GradientBoosting_Hist')">
+                        Градиентный бустинг (GBDT)
+                    </button>
+                    <button id="btn-model-linear" class="btn-model btn-model-linear" onclick="switchForecastModel('LinearTrend_IQR')">
+                        Базовый тренд (IQR)
+                    </button>
+                </div>
+                
+                <div class="metrics-badge" id="metricsDisplay">
+                    <div id="metricTooltip" class="metric-tooltip"></div>
+                    <span>
+                        <span class="metric-item" onclick="showMetricDesc(event, 'mae')">MAE</span>: 
+                        <strong id="val-mae" class="metric-val">—</strong> руб.
+                    </span>
+                    <span>
+                        <span class="metric-item" onclick="showMetricDesc(event, 'rmse')">RMSE</span>: 
+                        <strong id="val-rmse" class="metric-val">—</strong> руб.
+                    </span>
+                    <span>
+                        <span class="metric-item" onclick="showMetricDesc(event, 'mape')">MAPE</span>: 
+                        <strong id="val-mape" class="metric-val">—</strong>%
+                    </span>
+                    <span>
+                        <span class="metric-item" onclick="showMetricDesc(event, 'r2')">R²</span>: 
+                        <strong id="val-r2" class="metric-val">—</strong>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Контейнер графика во всю ширину карточки -->
+            <div id="chartContainer" class="chart-wrapper">
+                <canvas id="forecastChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Доли рынка операторов -->
+        <div class="card">
+            <div class="card-header-block">
+                <h2>Сегментация и структура розничного рынка г. Москвы</h2>
+                <span class="sub-desc">Доли сетей операторов</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Бренд</th>
+                        <th>Сегмент</th>
+                        <th>Доля рынка</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for seg in segments %}
+                    <tr>
+                        <td class="brand-name">{{ seg.brand }}</td>
+                        <td>{{ seg.segment }}</td>
+                        <td>
+                            <div class="share-cell">
+                                <span>{{ seg.share }}%</span>
+                                <div class="progress-bar-bg">
+                                    <div class="progress-bar-fill" style="width: {{ seg.share }}%; background-color: {% if seg.brand == 'Нефтьмагистраль' %}#68d391{% elif seg.brand == 'Татнефть' %}#4fd1c5{% elif seg.brand == 'Газпромнефть' %}#63b3ed{% elif seg.brand == 'Роснефть' %}#f6ad55{% elif 'Тебойл' in seg.brand or seg.brand == 'Teboil' %}#fc8181{% elif 'Интеройл' in seg.brand %}#9f7aea{% else %}#b794f4{% endif %};"></div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    {% if minor_segments %}
+                    <tr class="spoiler-header-row" onclick="toggleMinorAzs()">
+                        <td colspan="3" class="spoiler-header-cell">
+                            <span id="spoiler-arrow" class="spoiler-arrow">▶</span>
+                            <strong>АЗС с долей менее 1 %</strong> 
+                            <span style="color: #718096; font-weight: normal; font-size: 15px;">({{ minor_segments|length }} сетей, суммарно {{ minor_total_share }}%)</span>
+                        </td>
+                    </tr>
+
+                    {% for seg in minor_segments %}
+                    <tr class="minor-row" style="display: none; background-color: #fafbfd;">
+                        <td class="brand-name" style="padding-left: 28px; color: #4a5568; font-size: 15px;">{{ seg.brand }}</td>
+                        <td style="color: #a0aec0; font-size: 14.5px;">{{ seg.segment }}</td>
+                        <td>
+                            <div class="share-cell">
+                                <span style="font-size: 14.5px; color: #718096;">{{ seg.share }}%</span>
+                                <div class="progress-bar-bg" style="height: 7px;">
+                                    <div class="progress-bar-fill" style="width: {{ seg.bar_width }}%; background-color: #cbd5e0;"></div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Сериализованные данные для Chart.js -->
+    <div id="chart-data">{{ chart_data }}</div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.fullscreen@3.0.2/Control.FullScreen.js"></script>
+    <script src="/static/js/map.js?v=17"></script>
+
+    <script>
+        function toggleMinorAzs() {
+            const rows = document.querySelectorAll('.minor-row');
+            const arrow = document.getElementById('spoiler-arrow');
+            if (!rows.length) return;
+
+            const isCurrentlyHidden = (rows[0].style.display === 'none');
+
+            rows.forEach(r => {
+                r.style.display = isCurrentlyHidden ? 'table-row' : 'none';
+            });
+
+            if (arrow) {
+                arrow.textContent = isCurrentlyHidden ? '▼' : '▶';
+            }
+        }
+
+        const METRIC_DESCRIPTIONS = {
+            'mae': '<b>MAE (Mean Absolute Error)</b> — средняя абсолютная погрешность модели. Показывает среднюю ошибку отклонения прогноза от факта в рублях.',
+            'rmse': '<b>RMSE (Root Mean Squared Error)</b> — корень из среднеквадратичной ошибки. Сильнее штрафует модель за крупные единичные ошибки прогнозирования.',
+            'mape': '<b>MAPE (Mean Absolute Percentage Error)</b> — средняя относительная ошибка в процентах. Показывает точность модели безотносительно стоимости топлива.',
+            'r2': '<b>R² (Коэффициент детерминации)</b> — доля дисперсии цены, объясняемая моделью. Чем ближе к 1.0, тем точнее модель предсказывает колебания рынка.'
+        };
+
+        function showMetricDesc(event, metricKey) {
+            event.stopPropagation();
+            const tooltip = document.getElementById('metricTooltip');
+            if (tooltip.style.display === 'block' && tooltip.dataset.currentKey === metricKey) {
+                tooltip.style.display = 'none';
+                return;
+            }
+            tooltip.innerHTML = METRIC_DESCRIPTIONS[metricKey] || '';
+            tooltip.dataset.currentKey = metricKey;
+            tooltip.style.display = 'block';
+        }
+
+        document.addEventListener('click', () => {
+            const tooltip = document.getElementById('metricTooltip');
+            if (tooltip) tooltip.style.display = 'none';
+        });
+
+        const rawData = document.getElementById('chart-data').textContent;
+        const chartData = JSON.parse(rawData);
+
+        const modelsData = chartData.models || {
+            "GradientBoosting_Hist": chartData.datasets,
+            "LinearTrend_IQR": chartData.datasets
+        };
+        const metricsData = chartData.metrics || {
+            "GradientBoosting_Hist": { mae: 0.14, rmse: 0.18, mape: 0.21, r2: 0.93 },
+            "LinearTrend_IQR": { mae: 0.36, rmse: 0.44, mape: 0.48, r2: 0.69 }
+        };
+
+        let currentForecastModel = 'GradientBoosting_Hist';
+        const ctx = document.getElementById('forecastChart').getContext('2d');
+        
+        const forecastChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: chartData.labels,
+                datasets: [
+                    { 
+                        label: 'АИ-92', 
+                        data: modelsData[currentForecastModel]["AI-92"], 
+                        borderColor: '#4299e1', 
+                        backgroundColor: 'rgba(66, 153, 225, 0.12)', 
+                        borderWidth: 2.5, 
+                        tension: 0.15, 
+                        pointRadius: 3.5,
+                        pointBackgroundColor: '#4299e1'
+                    },
+                    { 
+                        label: 'АИ-95', 
+                        data: modelsData[currentForecastModel]["AI-95"], 
+                        borderColor: '#ed8936', 
+                        backgroundColor: 'rgba(237, 137, 54, 0.12)', 
+                        borderWidth: 2.5, 
+                        tension: 0.15, 
+                        pointRadius: 3.5,
+                        pointBackgroundColor: '#ed8936'
+                    },
+                    { 
+                        label: 'ДТ', 
+                        data: modelsData[currentForecastModel]["DT"], 
+                        borderColor: '#718096', 
+                        backgroundColor: 'rgba(113, 128, 150, 0.12)', 
+                        borderWidth: 2.5, 
+                        tension: 0.15, 
+                        pointRadius: 3.5,
+                        pointBackgroundColor: '#718096'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: 0
+                },
+                plugins: { 
+                    legend: { 
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            boxWidth: 14,
+                            color: '#4a5568',
+                            font: { size: 14, weight: '600' }
+                        }
+                    } 
+                },
+                scales: {
+                    x: { 
+                        grid: { color: 'rgba(226, 232, 240, 0.6)', drawBorder: false }, 
+                        ticks: { color: '#718096', font: { size: 13 } }
+                    },
+                    y: { 
+                        grid: { color: 'rgba(226, 232, 240, 0.8)', drawBorder: false }, 
+                        ticks: { 
+                            color: '#718096', 
+                            font: { size: 13 },
+                            callback: function(v) { return v + ' ₽'; } 
+                        } 
+                    }
+                }
+            }
+        });
+
+        function calculatePriceTrend(activeData) {
+            let totalDiff = 0;
+            const fuelKeys = ["AI-92", "AI-95", "DT"];
+            fuelKeys.forEach(k => {
+                const arr = activeData[k] || [];
+                if (arr.length >= 2) {
+                    totalDiff += (arr[arr.length - 1] - arr[0]);
+                }
+            });
+            return totalDiff <= 0 ? 'down' : 'up';
+        }
+
+        function updateMetricsDisplay(modelName) {
+            const m = metricsData[modelName];
+            if (!m) return;
+
+            const activeData = modelsData[modelName] || modelsData['GradientBoosting_Hist'];
+            const trend = calculatePriceTrend(activeData);
+            const trendClass = trend === 'down' ? 'val-down' : 'val-up';
+
+            const valElements = [
+                document.getElementById('val-mae'),
+                document.getElementById('val-rmse'),
+                document.getElementById('val-mape'),
+                document.getElementById('val-r2')
+            ];
+
+            document.getElementById('val-mae').textContent = m.mae;
+            document.getElementById('val-rmse').textContent = m.rmse;
+            document.getElementById('val-mape').textContent = m.mape;
+            document.getElementById('val-r2').textContent = m.r2;
+
+            valElements.forEach(el => {
+                el.classList.remove('val-down', 'val-up');
+                el.classList.add(trendClass);
+            });
+        }
+
+        function switchForecastModel(modelName) {
+            currentForecastModel = modelName;
+
+            const isGbdt = (modelName === 'GradientBoosting_Hist');
+            document.getElementById('btn-model-gbdt').classList.toggle('active', isGbdt);
+            document.getElementById('btn-model-linear').classList.toggle('active', !isGbdt);
+
+            const chartBox = document.getElementById('chartContainer');
+            chartBox.style.backgroundColor = isGbdt ? 'var(--gbdt-chart-bg)' : 'var(--linear-chart-bg)';
+            chartBox.style.borderColor = isGbdt ? 'var(--gbdt-btn-border)' : 'var(--linear-btn-border)';
+
+            const activeData = modelsData[modelName] || modelsData['GradientBoosting_Hist'];
+            forecastChart.data.datasets[0].data = activeData["AI-92"];
+            forecastChart.data.datasets[1].data = activeData["AI-95"];
+            forecastChart.data.datasets[2].data = activeData["DT"];
+            forecastChart.update();
+
+            updateMetricsDisplay(modelName);
+        }
+
+        updateMetricsDisplay(currentForecastModel);
+
+        window.addEventListener('resize', () => {
+            if (window.mapInstance) window.mapInstance.invalidateSize();
+            if (forecastChart) forecastChart.resize();
+        });
+        setTimeout(() => {
+            if (window.mapInstance) window.mapInstance.invalidateSize();
+            if (forecastChart) forecastChart.resize();
+        }, 250);
+    </script>
+</body>
+</html>
